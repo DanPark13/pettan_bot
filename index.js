@@ -1,30 +1,39 @@
 // Import discord.js Libraries
-const {Client, Intents, Interaction} = require('discord.js');
-const { intersection } = require('zod');
+const fs = require('node:fs');
+const {Client, Collection, Intents, ClientUser} = require('discord.js');
 const {token} = require('./config.json');
 
 // Create a new client instance
 const client = new Client({intents: [Intents.FLAGS.GUILDS]});
 
+client.commands = new Collection();
+
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles){
+    const command = require(`./commands/${file}`);
+    client.commands.set(command.data.name, command);
+}
+
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
-	console.log('Pettan Bot Ready!');
+	console.log('Pettan Bot is Ready!');
 });
 
 // When taking in commands outlined in `deploy-commands`, interact with different responses
 client.on('interactionCreate', async interaction => {
     if(!interaction.isCommand()) return;
 
-    const {commandName} = interaction;
+    const command = client.commands.get(interaction.commandName);
 
-    if(commandName === 'ping'){
-        await interaction.reply('pong!');
+    if(!command) return;
+
+    try{
+        await command.execute(interaction);
     } 
-    else if (commandName === 'server-info'){
-        await interaction.reply(`Server Name: ${interaction.guild.name}\nTotal Members: ${interaction.guild.memberCount}`);
-    } 
-    else if (commandName === 'user-info'){
-        await interaction.reply(`User: ${interaction.user.tag}\nYour ID: ${interaction.user.id}`);
+    catch (error){
+        console.error(error);
+        await interaction.reply({content: 'There was an error while executing this command', ephemeral: true});
     }
 });
 
