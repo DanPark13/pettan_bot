@@ -9,6 +9,9 @@ Make sure you have Node.JS on your system:
 
 Be sure to install dependecies by running:
 - `npm install discord.js`
+- `npm install @discordjs/builders @discordjs/rest discord-api-types`
+
+Optional dependecies:
 - `npm install --save-dev eslint`
 
 To run, use command `node index.js`
