@@ -8,10 +8,10 @@ Make sure you have Node.JS on your system:
 - npm version: 8.5.5
 
 Be sure to install dependecies by running:
-- `npm install discord.js dotenv`
-- `npm install -g typescript ts-node`
+- `npm install discord.js`
+- `npm install --save-dev eslint`
 
-To run, use command `ts-node index.ts`
+To run, use command `node index.js`
 
 ## Current Functionalities
 - 🏓 Sends Bot Ping with command `+ping`

@@ -11,7 +11,7 @@
     "url": "git+https://github.com/DanPark13/pettan_bot.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Daniel Park",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/DanPark13/pettan_bot/issues"
@@ -20,5 +20,8 @@
   "dependencies": {
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.13.0"
   }
 }
