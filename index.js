@@ -20,11 +20,11 @@ client.on('interactionCreate', async interaction => {
     if(commandName === 'ping'){
         await interaction.reply('pong!');
     } 
-    else if (commandName === 'server'){
-        await interaction.reply('Server info');
+    else if (commandName === 'server-info'){
+        await interaction.reply(`Server Name: ${interaction.guild.name}\nTotal Members: ${interaction.guild.memberCount}`);
     } 
-    else if (commandName === 'user'){
-        await interaction.reply('User info');
+    else if (commandName === 'user-info'){
+        await interaction.reply(`User: ${interaction.user.tag}\nYour ID: ${interaction.user.id}`);
     }
 });
 
